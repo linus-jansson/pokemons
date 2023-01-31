@@ -39,14 +39,15 @@ function PokeCard(props : any) {
 
     return (
         <div ref={elementRef} key={props.id} onMouseLeave={left} onMouseMove={tiltEffect} className="bg-zinc-800 group-hover:opacity-75 h-32 w-32 rounded-lg shadow-xl hover:scale-110 hover:!opacity-100 hover:rounded-xl duration-100 p-2">
-            <p>{props.id}</p>
-            <p>{props.name}</p>
+            <p className="text-xl font-bold">{props.name.charAt(0).toUpperCase() + props.name.slice(1)}</p>
+            <span className="text-sm">{props.id}</span>
+            <img alt="pokemon" className="w-14 h-14" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+props.id+".png"}/>
         </div>
     )
 }
 
 export default function Home() {
-    const [inputValue, setInputValue] = useState('1')
+    const [inputValue, setInputValue] = useState('')
     const [pokemons, setPokemons] = useState<poke[]>([])
 
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -73,12 +74,13 @@ export default function Home() {
 
     return (
         <>  
-            <div className="grid place-items-center h-screen">
-                <input value={inputValue} onChange={onChangeHandler} className="bg-zinc-700"/>
-                <div className="flex flex-wrap w-1/2 justify-center gap-2 group opacity-100 ">
+            <div className="flex flex-col mt-12 w-screen justify-center items-center ">
+                <h1 className="text-3xl font-bold mb-6">Pokemon index</h1>
+                <input value={inputValue} onChange={onChangeHandler} className="bg-zinc-700 p-2 mb-12" placeholder="search for pokemon id or name"/>
+                <div className="flex flex-wrap w-1/2 gap-2 group opacity-100 ">
                     {pokemons.map((pokemon: any) => {
                         return (
-                            <PokeCard id={pokemon.id} name={pokemon.pokemon} />
+                            <PokeCard key={pokemon.id }id={pokemon.id} name={pokemon.pokemon} />
                         )
                     })}
                 </div>
