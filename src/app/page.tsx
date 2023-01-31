@@ -66,7 +66,7 @@ export default function Home() {
                 }
             })
             
-        let new_poke = filteredPokemons(e.target.value) as poke[]
+        let new_poke = filteredPokemons(e.target.value) as any
         setPokemons(new_poke)
 
     }
