@@ -1,7 +1,7 @@
 
 "use client"
 
-import React, { useState, useRef } from "react"
+import { useState, useRef } from "react"
 import _pokemons from "../data/pokemons"
 
 type poke = {
