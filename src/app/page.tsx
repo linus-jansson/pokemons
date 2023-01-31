@@ -46,6 +46,17 @@ function PokeCard(props : any) {
     )
 }
 
+const filterPokemons = (input: any) => _pokemons.filter((pokemon: any) => {
+    if (pokemon.id > 2000) return;
+
+    if (pokemon.pokemon.includes(input) || 
+        pokemon.id.toString().includes(input)
+    ) {
+        console.log(pokemon)
+        return pokemon
+    }
+})
+
 export default function Home() {
     const [inputValue, setInputValue] = useState('')
     const [pokemons, setPokemons] = useState<poke[]>([])
@@ -56,18 +67,8 @@ export default function Home() {
             setPokemons([])
             return
         }
-        const filteredPokemons = (input: any) => _pokemons.filter((pokemon: any) => {
-                if (pokemon.id > 2000) return;
-
-                if (pokemon.pokemon.includes(input) || 
-                    pokemon.id.toString().includes(input)
-                ) {
-                    console.log(pokemon)
-                    return pokemon
-                }
-            })
             
-        let new_poke = filteredPokemons(e.target.value) as any
+        let new_poke = filterPokemons(e.target.value.toLowerCase()) as any
         setPokemons(new_poke)
 
     }
