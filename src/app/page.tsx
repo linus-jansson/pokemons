@@ -5,8 +5,8 @@ import React, { useState, useRef } from "react"
 import _pokemons from "../data/pokemons"
 
 type poke = {
-    id: number
-    name: string
+    id: string
+    pokemon: string
 }
 
 function PokeCard(props : any) {
@@ -63,8 +63,13 @@ export default function Home() {
 
     function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
         setInputValue(e.target.value)
+        
         if (e.target.value === '') {
             setPokemons([])
+            return
+        }
+        if (e.target.value == '*') {
+            setPokemons(_pokemons)
             return
         }
             
